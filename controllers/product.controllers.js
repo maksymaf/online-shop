@@ -9,6 +9,18 @@ const getAllProducts = async (req, res) => {
     }
 }
 
+const createProduct = async (req, res) => {
+    try{
+        const {name, price} = req.body;
+        const product = new Product({name, price});
+
+        await product.save();
+    }catch(error){
+        res.status(500).json({message: error.message});
+    }
+}
+
 module.exports = {
-    getAllProducts
+    getAllProducts,
+    createProduct
 }
