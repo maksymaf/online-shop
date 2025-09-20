@@ -7,7 +7,7 @@ const newCategory = async (req, res) => {
         let category = await Category.findOne({name});
 
         if (category){
-            res.status(403).json({message: 'This category already exists'});
+            return res.status(403).json({message: 'This category already exists'});
         }
 
         category = new Category({name});
@@ -35,10 +35,10 @@ const getCategoryById = async (req, res) => {
         const category = await Category.findById(id);
 
         if (!category){
-            res.status(404).json({message: 'Category with this id does not exist'});
+            return res.status(404).json({message: 'Category with this id does not exist'});
         }
 
-        res.status(200).json(category);
+        return res.status(200).json(category);
     }catch(error){
         res.status(500).json({message: error.message})
     } 
